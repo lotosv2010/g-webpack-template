@@ -4,7 +4,12 @@ const MiniCssExtractPlugin = require('mini-css-extract-plugin');
 const webpack = require('webpack');
 
 module.exports = {
-  entry: './src/index.js',
+  entry: {
+    main: {
+      import: path.resolve(__dirname, '..', 'src', 'index.js'),
+      runtime: 'runtime-main' // 运行时包
+    }
+  },
   output: {
     filename: 'js/[name].[contenthash:8].js', // 打包后的文件名
     path: path.resolve(__dirname, '..', 'dist',), // 路径必须是一个绝对路径
