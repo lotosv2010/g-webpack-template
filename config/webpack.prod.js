@@ -7,6 +7,7 @@ const CopyWebpackPlugin = require('copy-webpack-plugin');
 const WebpackBar = require('webpackbar');
 const { merge } = require('webpack-merge');
 const common = require('./webpack.common');
+const BundleAnalyzerPlugin = require('webpack-bundle-analyzer').BundleAnalyzerPlugin;
 
 module.exports = merge(common,{
   mode: 'production',
@@ -43,6 +44,11 @@ module.exports = merge(common,{
     }),
     new webpack.BannerPlugin({
       banner: 'This file is created by gwb'
+    }),
+    new BundleAnalyzerPlugin({
+      analyzerMode: 'static',      // 生成静态HTML报告
+      reportFilename: path.resolve(__dirname, '..', 'reports', 'index.html'), // 输出路径（相对于 output.path）
+      openAnalyzer: Boolean(process.env.OPEN_ANALYZER)         // 是否自动打开浏览器
     })
   ]
 });

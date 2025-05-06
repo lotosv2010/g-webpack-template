@@ -6,7 +6,9 @@
   "scripts": {
     "dev": "cross-env NODE_ENV=development webpack serve --config ./config/webpack.dev.js",
     "build": "cross-env NODE_ENV=production webpack --config ./config/webpack.prod.js",
-    "start": "nodemon server/index.js"
+    "start": "nodemon server/index.js",
+    "preview": "npm run build && serve dist --listen 9090 --cors",
+    "analyze": "cross-env OPEN_ANALYZER=true npm run build"
   },
   "keywords": [],
   "author": "",
@@ -41,12 +43,14 @@
     "responsive-loader": "^3.1.2",
     "sass": "^1.87.0",
     "sass-loader": "^16.0.5",
+    "serve": "^14.2.4",
     "sharp": "^0.34.1",
     "style-loader": "^4.0.0",
     "terser-webpack-plugin": "^5.3.14",
     "ts-loader": "^9.5.2",
     "typescript": "^5.8.3",
     "webpack": "^5.99.7",
+    "webpack-bundle-analyzer": "^4.10.2",
     "webpack-cli": "^6.0.1",
     "webpack-dev-middleware": "^7.4.2",
     "webpack-dev-server": "^5.2.1",
