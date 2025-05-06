@@ -1,2 +1,1 @@
-# g-webpack-template
-webpack 通用模板
+# 开发npm包的模板
