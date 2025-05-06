@@ -1,13 +1,14 @@
 const path = require("path");
 const nodeExternals = require('webpack-node-externals');
 const MiniCssExtractPlugin = require("mini-css-extract-plugin");
-module.exports = {
+const { merge } = require("webpack-merge");
+const baseConfig = {
   mode: "development",
   devtool: 'source-map',
   entry: "./src/index.js",
   externals: [
     nodeExternals()
-  ],  
+  ],
   module: {
     rules: [
       {
@@ -26,3 +27,18 @@ module.exports = {
   },
   plugins: [new MiniCssExtractPlugin()],
 };
+
+module.exports = [
+  merge(baseConfig, {
+    output: {
+      filename: "[name]-commonjs.js",
+      libraryTarget: 'commonjs'
+    },
+  }),
+  merge(baseConfig, {
+    output: {
+      filename: "[name]-amd.js",
+      libraryTarget: 'amd'
+    },
+  })
+];
