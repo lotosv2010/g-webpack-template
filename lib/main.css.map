@@ -1,0 +1,1 @@
+{"version":3,"file":"main.css","mappings":";;;AAAA;EACE,uBAAuB;AACzB,C","sources":["webpack://g-npm-template/./src/index.css"],"sourcesContent":["body{\n  background-color: green;\n}"],"names":[],"sourceRoot":""}

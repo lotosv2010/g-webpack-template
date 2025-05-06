@@ -1,0 +1,9 @@
+# 忽略目录
+node_modules
+.git
+.idea
+
+# 忽略文件
+.DS_Store
+pnpm-lock.yaml
+npm-lock.json

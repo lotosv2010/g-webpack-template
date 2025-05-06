@@ -1,11 +1,11 @@
-import $ from 'jquery';
-import _ from 'lodash';
+// import $ from 'jquery';
+// import _ from 'lodash';
 import './index.css';
 
-export { 
-  _,
-  $
-}
+// export { 
+//   _,
+//   $
+// }
 
 export const add = (a, b) => a + b
 

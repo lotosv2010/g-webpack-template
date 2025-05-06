@@ -2,22 +2,27 @@
   "name": "g-npm-template",
   "version": "1.0.0",
   "description": "开发npm包的模板",
-  "main": "index.js",
+  "main": "lib/main.js",
   "scripts": {
     "build": "webpack --watch"
   },
-  "keywords": [],
-  "author": "",
+  "keywords": [
+    "npm",
+    "template"
+  ],
+  "author": "gwb",
   "license": "ISC",
   "packageManager": "pnpm@10.5.2",
   "devDependencies": {
     "css-loader": "^7.1.2",
-    "jquery": "^3.7.1",
-    "lodash": "^4.17.21",
     "mini-css-extract-plugin": "^2.9.2",
     "webpack": "^5.99.7",
     "webpack-cli": "^6.0.1",
     "webpack-merge": "^6.0.1",
     "webpack-node-externals": "^3.0.0"
+  },
+  "peerDependencies": {
+    "jquery": "^3.7.1",
+    "lodash": "^4.17.21"
   }
 }
