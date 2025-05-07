@@ -9,6 +9,8 @@ const { merge } = require('webpack-merge');
 const common = require('./webpack.common');
 const BundleAnalyzerPlugin = require('webpack-bundle-analyzer').BundleAnalyzerPlugin;
 
+const WebpackLogPlugin = require('./webpack-log-plugin');
+
 module.exports = merge(common,{
   mode: 'production',
   devtool: 'hidden-source-map',
@@ -50,6 +52,7 @@ module.exports = merge(common,{
       analyzerMode: 'static',      // 生成静态HTML报告
       reportFilename: path.resolve(__dirname, '..', 'reports', 'index.html'), // 输出路径（相对于 output.path）
       openAnalyzer: Boolean(process.env.OPEN_ANALYZER)         // 是否自动打开浏览器
-    })
+    }),
+    new WebpackLogPlugin()
   ]
 });
