@@ -43,7 +43,6 @@ module.exports = merge(common,{
       profile: false,    // Show build duration
       reporter: {
         allDone(context) {
-          console.log(process.env.NODE_ENV);
           if (process.env.NODE_ENV === 'development') {
             const interfaces = os.networkInterfaces();
             const ipv4 = Object.values(interfaces)

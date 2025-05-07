@@ -11,6 +11,7 @@ const BundleAnalyzerPlugin = require('webpack-bundle-analyzer').BundleAnalyzerPl
 
 module.exports = merge(common,{
   mode: 'production',
+  devtool: 'hidden-source-map',
   watch: false,
   watchOptions: {
     ignored: '**/node_modules',
