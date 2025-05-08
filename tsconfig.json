@@ -33,6 +33,6 @@
     "config",
     "postcss.config.js",
     "eslint.config.cjs",
-    "server"
+    "mock"
   ]
 }
