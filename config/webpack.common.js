@@ -3,6 +3,7 @@ const os = require("os");
 const HtmlWebpackPlugin = require("html-webpack-plugin");
 const MiniCssExtractPlugin = require("mini-css-extract-plugin");
 const webpack = require("webpack");
+const HtmlWebpackTagsPlugin = require('html-webpack-tags-plugin');
 
 // 判断是否是生产环境
 const isProduction = process.env.NODE_ENV === "production";
@@ -40,6 +41,7 @@ module.exports = {
     mainFiles: ["index"],
   },
   module: {
+    noParse: (content) => /jquery/.test(content), // 忽略 jQuery 模块的解析
     rules: [
       {
         test: /\.(svg)$/i,
@@ -89,13 +91,13 @@ module.exports = {
           },
         ],
       },
-      {
-        test: require.resolve("jquery"),
-        loader: "expose-loader",
-        options: {
-          exposes: ["$", "jQuery"],
-        },
-      },
+      // {
+      //   test: require.resolve("jquery"), // 暴露 jQuery
+      //   loader: "expose-loader",
+      //   options: {
+      //     exposes: ["$", "jQuery"],
+      //   },
+      // },
       {
         test: /\.js$/,
         use: [
@@ -163,12 +165,27 @@ module.exports = {
       hash: true,
       chunks: ["app"],
     }),
+    // 添加全局变量
     new webpack.ProvidePlugin({
+      $: "jquery",
+      jQuery: 'jquery',
       _: "lodash",
       _map: ["lodash", "map"],
     }),
+    // 添加全局变量
     new webpack.DefinePlugin({
       IS_PRODUCTION: isProduction,
     }),
+    // 添加静态资源
+    new HtmlWebpackTagsPlugin({ 
+      publicPath: '',
+      append: false, 
+      tags: [
+        {
+          path: "https://cdn.bootcdn.net/ajax/libs/jquery/3.6.0/jquery.min.js",
+          hash: true,
+        }
+      ]
+    })
   ],
 };
