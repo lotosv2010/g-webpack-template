@@ -29,6 +29,17 @@ module.exports = merge(common,{
       }
     ]
   },
+  cache: {
+    type: 'filesystem',             // 使用文件缓存
+    name: 'webpack-cache',          // 可选：多个构建配置时用于区分缓存目录
+    version: '1.0',                 // 可选：更改版本号可以手动让缓存失效
+    buildDependencies: {
+      config: [__filename],         // 追踪配置文件依赖
+      tsconfig: [                   // 可选：追踪 ts 配置变化
+        path.resolve(__dirname, 'tsconfig.json'),
+      ],
+    },
+  },
   plugins: [
     new ESLintPlugin({
       context: path.resolve(__dirname), // 明确指定上下文路径

@@ -5,7 +5,8 @@
   "main": "index.js",
   "scripts": {
     "dev": "cross-env NODE_ENV=development webpack serve --config ./config/webpack.dev.js",
-    "build": "cross-env NODE_ENV=production webpack --config ./config/webpack.prod.js",
+    "build": "npm run clean && cross-env NODE_ENV=production webpack --config ./config/webpack.prod.js",
+    "clean": "rimraf node_modules/.cache",
     "start": "nodemon mock/index.js",
     "preview": "npm run build && serve dist --listen 9090 --cors",
     "analyze": "cross-env OPEN_ANALYZER=true npm run build",
@@ -52,6 +53,7 @@
     "sharp": "^0.34.1",
     "style-loader": "^4.0.0",
     "terser-webpack-plugin": "^5.3.14",
+    "thread-loader": "^4.0.4",
     "ts-loader": "^9.5.2",
     "typescript": "^5.8.3",
     "webpack": "^5.99.7",
