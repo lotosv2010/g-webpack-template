@@ -2,11 +2,13 @@ import '@/index.css';
 import '@/index.less';
 import '@/index.scss';
 import '@js/student';
+import '@js/teacher';
 import '@js/jq';
 import '@js/lodash';
 import '@ts/index.ts';
 import '@js/img';
 import '@js/fetch';
+import utils from '@js/utils';
 
 export const data = {
   "key": "webpack",
@@ -60,8 +62,12 @@ console.log('IS_PRODUCTION', IS_PRODUCTION);
 
 // 懒加载
 import(
+  /* webpackPreload: true */
   /* webpackChunkName: "lazy-load" */ // 魔法注释
   './js/lazy-load'
 ).then(({ name, getName}) => {
   console.log('Lazy loaded module', name, getName());
 });
+
+// common.js
+console.log(utils);

@@ -25,7 +25,36 @@ module.exports = merge(common,{
     minimizer: [
       new CssMinimizerPlugin(),
       new TerserPlugin()
-    ]
+    ],
+    // 代码分割核心配置
+    splitChunks: {
+      chunks: 'all', // 处理所有类型的 chunk（async、initial）
+      minSize: 20000, // 最小分割体积 20KB
+      maxSize: 100000, // 尝试拆分大于 100KB 的 chunk
+      minChunks: 1, // 至少被引用 1 次才拆分
+      cacheGroups: {
+        // 第三方库分组
+        vendors: {
+          test: /[\\/]node_modules[\\/]/,
+          name: 'vendors',
+          minSize: 0,
+          priority: 10, // 优先级高于默认分组
+          reuseExistingChunk: true,
+        },
+        // 公共模块分组
+        commons: {
+          name: 'commons',
+          minSize: 0,
+          minChunks: 2, // 至少被 2 个入口引用
+          priority: 5,  // 优先级高于默认分组
+          reuseExistingChunk: true,
+        },
+      },
+    },
+    // 提取 Webpack 运行时代码
+    runtimeChunk: {
+      name: (entrypoint) => `runtime~${entrypoint.name}`, // 运行时包
+    },
   },
   plugins: [
     new MiniCssExtractPlugin({

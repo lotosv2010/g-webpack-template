@@ -1,3 +1,7 @@
+import utils from '@js/utils';
+
+console.log(utils);
+
 // es6
 class Student {
   constructor(name) {

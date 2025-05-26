@@ -11,13 +11,16 @@ module.exports = {
   entry: {
     main: {
       import: path.resolve(__dirname, "..", "src", "index.js"),
-      runtime: "runtime-main", // 运行时包
+      // runtime: "runtime-main", // 运行时包
     },
+    app: path.resolve(__dirname, "..", "src", "app.js"),
   },
   output: {
     filename: "js/[name].[contenthash:8].js", // 打包后的文件名
+    chunkFilename: "js/[name].[contenthash:8].chunk.js", // 动态导入的 chunk 命名
     path: path.resolve(__dirname, "..", "dist"), // 路径必须是一个绝对路径
     clean: true,
+    publicPath: '/',
   },
   stats: "minimal", // 只在发生错误或新的编译开始时输出
   infrastructureLogging: {
@@ -96,12 +99,12 @@ module.exports = {
       {
         test: /\.js$/,
         use: [
-          {
-            loader: "thread-loader", // 多线程提升大型构建性能
-            options: {
-              workers: os.cpus().length, // 根据 CPU 调整
-            },
-          },
+          // {
+          //   loader: "thread-loader", // 多线程提升大型构建性能
+          //   options: {
+          //     workers: os.cpus().length, // 根据 CPU 调整
+          //   },
+          // },
           {
             loader: "babel-loader",
             options: {
@@ -149,6 +152,16 @@ module.exports = {
       },
       hash: true,
       chunks: ["main"],
+    }),
+    new HtmlWebpackPlugin({
+      template: path.resolve(__dirname, "..", "public", "index.html"),
+      filename: "app.html",
+      minify: {
+        removeAttributeQuotes: true,
+        collapseWhitespace: true,
+      },
+      hash: true,
+      chunks: ["app"],
     }),
     new webpack.ProvidePlugin({
       _: "lodash",
