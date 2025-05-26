@@ -57,3 +57,11 @@ console.log(a);
 
 // DefinePlugin
 console.log('IS_PRODUCTION', IS_PRODUCTION);
+
+// 懒加载
+import(
+  /* webpackChunkName: "lazy-load" */ // 魔法注释
+  './js/lazy-load'
+).then(({ name, getName}) => {
+  console.log('Lazy loaded module', name, getName());
+});
