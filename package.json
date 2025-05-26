@@ -54,6 +54,7 @@
     "sass-loader": "^16.0.5",
     "serve": "^14.2.4",
     "sharp": "^0.34.1",
+    "speed-measure-webpack-plugin": "^1.5.0",
     "style-loader": "^4.0.0",
     "swc-loader": "^0.2.6",
     "terser-webpack-plugin": "^5.3.14",

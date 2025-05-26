@@ -11,8 +11,12 @@ const BundleAnalyzerPlugin = require('webpack-bundle-analyzer').BundleAnalyzerPl
 const FileManagerPlugin = require('filemanager-webpack-plugin');
 const WebpackLogPlugin = require('./webpack-log-plugin');
 const { EsbuildPlugin } = require('esbuild-loader');
+const SpeedMeasurePlugin = require('speed-measure-webpack-plugin');
+const smp = new SpeedMeasurePlugin({
+  disable: true // 完全禁用 SpeedMeasurePlugin
+}); 
 
-module.exports = merge(common,{
+const mergedConfig = merge(common,{
   mode: 'production',
   devtool: 'hidden-source-map',
   watch: false,
@@ -29,13 +33,15 @@ module.exports = merge(common,{
         css: true // ✅ 默认开启压缩 CSS
       })
     ],
+    chunkIds: 'deterministic', // 默认使用 chunk 的 hash 值
+    moduleIds: 'deterministic', // 默认使用 module 的 hash 值
     // 代码分割核心配置
     splitChunks: {
       chunks: 'all', // 处理所有类型的 chunk（async、initial）
       minSize: 20000, // 最小分割体积 20KB
       maxSize: 100000, // 尝试拆分大于 100KB 的 chunk
       minChunks: 1, // 至少被引用 1 次才拆分
-      cacheGroups: {
+      cacheGroups: { // 分组配置
         // 第三方库分组
         vendors: {
           test: /[\\/]node_modules[\\/]/,
@@ -59,9 +65,15 @@ module.exports = merge(common,{
       name: (entrypoint) => `runtime~${entrypoint.name}`, // 运行时包
     },
   },
+  performance: {
+    hints: 'warning', // 体积超限时报错
+    maxAssetSize: 250000, // 单个文件最大体积 250KB
+    maxEntrypointSize: 250000, // 入口文件最大体积 250KB
+  },
   plugins: [
     new MiniCssExtractPlugin({
-      filename: 'css/[name].css'
+      filename: 'css/[name].css',
+      chunkFilename: 'css/[name].chunk.css'
     }),
     new CopyWebpackPlugin({
       patterns: [
@@ -109,3 +121,5 @@ module.exports = merge(common,{
     new WebpackLogPlugin()
   ]
 });
+
+module.exports = mergedConfig;

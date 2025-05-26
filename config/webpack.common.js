@@ -108,7 +108,7 @@ module.exports = {
       {
         test: /\.css$/i,
         use: [
-          !isProduction ? "style-loader" : MiniCssExtractPlugin.loader,
+          isProduction ? MiniCssExtractPlugin.loader : "style-loader",
           "css-loader",
           "postcss-loader",
         ],
@@ -116,7 +116,7 @@ module.exports = {
       {
         test: /\.less$/i,
         use: [
-          !isProduction ? "style-loader" : MiniCssExtractPlugin.loader,
+          isProduction ? MiniCssExtractPlugin.loader : "style-loader",
           "css-loader",
           "less-loader",
           "postcss-loader",
@@ -125,7 +125,7 @@ module.exports = {
       {
         test: /\.(sass|scss)$/i,
         use: [
-          !isProduction ? "style-loader" : MiniCssExtractPlugin.loader,
+          isProduction ? MiniCssExtractPlugin.loader : "style-loader",
           "css-loader",
           "sass-loader",
           "postcss-loader",

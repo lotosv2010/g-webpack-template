@@ -135,6 +135,9 @@ importers:
       sharp:
         specifier: ^0.34.1
         version: 0.34.1
+      speed-measure-webpack-plugin:
+        specifier: ^1.5.0
+        version: 1.5.0(webpack@5.99.7)
       style-loader:
         specifier: ^4.0.0
         version: 4.0.0(webpack@5.99.7)
@@ -4383,6 +4386,12 @@ packages:
   spdy@4.0.2:
     resolution: {integrity: sha512-r46gZQZQV+Kl9oItvl1JZZqJKGr+oEkB08A6BzkiR7593/7IbtuncXHd2YoYeTsG4157ZssMu9KYvUHLcjcDoA==}
     engines: {node: '>=6.0.0'}
+
+  speed-measure-webpack-plugin@1.5.0:
+    resolution: {integrity: sha512-Re0wX5CtM6gW7bZA64ONOfEPEhwbiSF/vz6e2GvadjuaPrQcHTQdRGsD8+BE7iUOysXH8tIenkPCQBEcspXsNg==}
+    engines: {node: '>=6.0.0'}
+    peerDependencies:
+      webpack: ^1 || ^2 || ^3 || ^4 || ^5
 
   stable@0.1.8:
     resolution: {integrity: sha512-ji9qxRnOVfcuLDySj9qzhGSEFVobyt1kIOSkj1qZzYLzq7Tos/oUUWvotUPQLlrsidqsK6tBH89Bc9kL5zHA6w==}
@@ -9526,6 +9535,11 @@ snapshots:
       spdy-transport: 3.0.0
     transitivePeerDependencies:
       - supports-color
+
+  speed-measure-webpack-plugin@1.5.0(webpack@5.99.7):
+    dependencies:
+      chalk: 4.1.2
+      webpack: 5.99.7(@swc/core@1.11.29)(webpack-cli@6.0.1)
 
   stable@0.1.8:
     optional: true
