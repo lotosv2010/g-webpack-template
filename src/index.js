@@ -9,6 +9,7 @@ import '@ts/index.ts';
 import '@js/img';
 import '@js/fetch';
 import '@js/hot';
+import '@js/moment';
 import utils from '@js/utils';
 
 export const data = {

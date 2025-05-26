@@ -91,13 +91,6 @@ module.exports = {
           },
         ],
       },
-      // {
-      //   test: require.resolve("jquery"), // 暴露 jQuery
-      //   loader: "expose-loader",
-      //   options: {
-      //     exposes: ["$", "jQuery"],
-      //   },
-      // },
       {
         test: /\.js$/,
         use: [
@@ -186,6 +179,10 @@ module.exports = {
           hash: true,
         }
       ]
-    })
+    }),
+    new webpack.IgnorePlugin({
+      resourceRegExp: /^\.\/locale$/,
+      contextRegExp: /moment$/,
+    }),
   ],
 };
