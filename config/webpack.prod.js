@@ -10,6 +10,7 @@ const common = require('./webpack.common');
 const BundleAnalyzerPlugin = require('webpack-bundle-analyzer').BundleAnalyzerPlugin;
 const FileManagerPlugin = require('filemanager-webpack-plugin');
 const WebpackLogPlugin = require('./webpack-log-plugin');
+const { EsbuildPlugin } = require('esbuild-loader');
 
 module.exports = merge(common,{
   mode: 'production',
@@ -23,8 +24,10 @@ module.exports = merge(common,{
   optimization: {
     minimize: true,
     minimizer: [
-      new CssMinimizerPlugin(),
-      new TerserPlugin()
+      new EsbuildPlugin({
+        target: 'es2015',
+        css: true // ✅ 默认开启压缩 CSS
+      })
     ],
     // 代码分割核心配置
     splitChunks: {

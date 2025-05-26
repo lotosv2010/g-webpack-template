@@ -1,5 +1,4 @@
 const path = require("path");
-const os = require("os");
 const HtmlWebpackPlugin = require("html-webpack-plugin");
 const MiniCssExtractPlugin = require("mini-css-extract-plugin");
 const webpack = require("webpack");
@@ -83,31 +82,28 @@ module.exports = {
           },
         },
       },
+      // 用 SWC 处理 JS/TS（自带多线程）
       {
-        test: /\.(ts|tsx)$/i,
-        use: [
-          {
-            loader: "ts-loader",
-          },
-        ],
-      },
-      {
-        test: /\.js$/,
-        use: [
-          // {
-          //   loader: "thread-loader", // 多线程提升大型构建性能
-          //   options: {
-          //     workers: os.cpus().length, // 根据 CPU 调整
-          //   },
-          // },
-          {
-            loader: "babel-loader",
-            options: {
-              cacheDirectory: true,   // 启用 Babel 缓存（保存在 node_modules/.cache/babel-loader）
+        test: /\.(js|jsx|ts|tsx)$/,
+        exclude: /node_modules/,
+        use: {
+          loader: 'swc-loader', // SWC 替代 Babel
+          options: {
+            jsc: {
+              parser: {
+                syntax: 'typescript',
+                tsx: true,
+                decorators: true,       // ✅ 启用装饰器
+              },
+              transform: {
+                legacyDecorator: true,  // ✅ 必须设置为 true
+                react: {
+                  runtime: 'automatic',
+                },
+              },
             },
           },
-        ],
-        exclude: /node_modules/,
+        },
       },
       {
         test: /\.css$/i,
@@ -175,7 +171,7 @@ module.exports = {
       append: false, 
       tags: [
         {
-          path: "https://cdn.bootcdn.net/ajax/libs/jquery/3.6.0/jquery.min.js",
+          path: "https://cdn.jsdelivr.net/npm/jquery@3.7.1/dist/jquery.min.js",
           hash: true,
         }
       ]
