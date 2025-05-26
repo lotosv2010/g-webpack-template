@@ -19,8 +19,13 @@ module.exports = merge(common,{
     port,
     open: false,
     client: {
-      progress: false,
+      progress: false, // 显示进度
+      overlay: { // 编译错误时浏览器全屏覆盖
+        errors: true,
+        warnings: false,
+      },
     },
+    hot: true, // 开启热更新
     proxy: [
       {
         context: ['/api'],
@@ -77,6 +82,8 @@ module.exports = merge(common,{
           }
         }
       }
-    })
+    }),
+    // 模块热替换的插件
+    new webpack.HotModuleReplacementPlugin(),
   ]
 });

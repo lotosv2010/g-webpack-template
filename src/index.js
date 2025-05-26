@@ -8,6 +8,7 @@ import '@js/lodash';
 import '@ts/index.ts';
 import '@js/img';
 import '@js/fetch';
+import '@js/hot';
 import utils from '@js/utils';
 
 export const data = {
@@ -71,3 +72,11 @@ import(
 
 // common.js
 console.log(utils);
+
+// 模块热替换
+if (import.meta.webpackHot) {
+  console.log('Hot Module Replacement Enabled.', import.meta.webpackHot);
+  import.meta.webpackHot.accept('./js/hot.js', () => {
+    console.log('Accepting the updated utils module!');
+  });
+}
