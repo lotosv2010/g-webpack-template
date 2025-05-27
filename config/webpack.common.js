@@ -168,8 +168,7 @@ module.exports = {
     new webpack.ProvidePlugin({
       $: "jquery",
       jQuery: "jquery",
-      // _: ["lodash-es", "default"],
-      isArray: ["lodash", "isArray"],
+      isArray: ["lodash-es", "isArray"],
     }),
     // 添加全局变量
     new webpack.DefinePlugin({
