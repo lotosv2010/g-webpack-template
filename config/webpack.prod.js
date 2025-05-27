@@ -10,6 +10,15 @@ const FileManagerPlugin = require('filemanager-webpack-plugin');
 const WebpackLogPlugin = require('./webpack-log-plugin');
 const { EsbuildPlugin } = require('esbuild-loader');
 
+const formatName = (module, chunks, cacheGroupKey) => {
+  const moduleFileName = module
+    .identifier()
+    .split('/')
+    .reduceRight((item) => item);
+  // const allChunksNames = chunks.map((item) => item.name).join('~');
+  return `${cacheGroupKey}-${moduleFileName}`;
+}
+
 const mergedConfig = merge(common,{
   mode: 'production',
   devtool: 'hidden-source-map',
@@ -39,14 +48,15 @@ const mergedConfig = merge(common,{
         // 第三方库分组
         vendors: {
           test: /[\\/]node_modules[\\/]/,
-          name: 'vendors',
+          name: formatName,
           minSize: 0,
+          maxSize: 20000,
           priority: 10, // 优先级高于默认分组
           reuseExistingChunk: true,
         },
         // 公共模块分组
         commons: {
-          name: 'commons',
+          name: formatName,
           minSize: 0,
           minChunks: 2, // 至少被 2 个入口引用
           priority: 5,  // 优先级高于默认分组

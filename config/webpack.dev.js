@@ -6,10 +6,6 @@ const webpack = require("webpack");
 const WebpackBar = require("webpackbar");
 const { merge } = require("webpack-merge");
 const common = require("./webpack.common");
-const SpeedMeasurePlugin = require("speed-measure-webpack-plugin");
-const smp = new SpeedMeasurePlugin({
-  exclude: [/mini-css-extract-plugin/], // 排除指定插件
-});
 
 const port = 3030;
 
@@ -84,4 +80,4 @@ const mergedConfig = merge(common, {
   ],
 });
 
-module.exports = smp.wrap(mergedConfig);
+module.exports = mergedConfig;
