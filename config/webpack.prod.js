@@ -1,7 +1,5 @@
 const path = require('path');
 const MiniCssExtractPlugin = require('mini-css-extract-plugin');
-const CssMinimizerPlugin = require('css-minimizer-webpack-plugin');
-const TerserPlugin = require("terser-webpack-plugin");
 const webpack = require('webpack');
 const CopyWebpackPlugin = require('copy-webpack-plugin');
 const WebpackBar = require('webpackbar');
@@ -11,10 +9,6 @@ const BundleAnalyzerPlugin = require('webpack-bundle-analyzer').BundleAnalyzerPl
 const FileManagerPlugin = require('filemanager-webpack-plugin');
 const WebpackLogPlugin = require('./webpack-log-plugin');
 const { EsbuildPlugin } = require('esbuild-loader');
-const SpeedMeasurePlugin = require('speed-measure-webpack-plugin');
-const smp = new SpeedMeasurePlugin({
-  disable: true // 完全禁用 SpeedMeasurePlugin
-}); 
 
 const mergedConfig = merge(common,{
   mode: 'production',

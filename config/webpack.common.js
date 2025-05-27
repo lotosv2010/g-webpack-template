@@ -2,7 +2,8 @@ const path = require("path");
 const HtmlWebpackPlugin = require("html-webpack-plugin");
 const MiniCssExtractPlugin = require("mini-css-extract-plugin");
 const webpack = require("webpack");
-const HtmlWebpackTagsPlugin = require('html-webpack-tags-plugin');
+const HtmlWebpackTagsPlugin = require("html-webpack-tags-plugin");
+const ESLintPlugin = require("eslint-webpack-plugin");
 
 // 判断是否是生产环境
 const isProduction = process.env.NODE_ENV === "production";
@@ -20,7 +21,7 @@ module.exports = {
     chunkFilename: "js/[name].[contenthash:8].chunk.js", // 动态导入的 chunk 命名
     path: path.resolve(__dirname, "..", "dist"), // 路径必须是一个绝对路径
     clean: true,
-    publicPath: '/',
+    publicPath: "/",
   },
   stats: "minimal", // 只在发生错误或新的编译开始时输出
   infrastructureLogging: {
@@ -87,18 +88,18 @@ module.exports = {
         test: /\.(js|jsx|ts|tsx)$/,
         exclude: /node_modules/,
         use: {
-          loader: 'swc-loader', // SWC 替代 Babel
+          loader: "swc-loader", // SWC 替代 Babel
           options: {
             jsc: {
               parser: {
-                syntax: 'typescript',
+                syntax: "typescript",
                 tsx: true,
-                decorators: true,       // ✅ 启用装饰器
+                decorators: true, // ✅ 启用装饰器
               },
               transform: {
-                legacyDecorator: true,  // ✅ 必须设置为 true
+                legacyDecorator: true, // ✅ 必须设置为 true
                 react: {
-                  runtime: 'automatic',
+                  runtime: "automatic",
                 },
               },
             },
@@ -134,6 +135,15 @@ module.exports = {
     ],
   },
   plugins: [
+    new ESLintPlugin({
+      context: path.resolve(__dirname, "..", "src"), // 明确指定上下文路径
+      overrideConfigFile: path.resolve(__dirname, "..", "eslint.config.js"), // 显式指定配置文件
+      extensions: ["js", "ts", "jsx", "tsx"], // 检测的文件扩展名
+      exclude: "node_modules", // 排除目录
+      formatter: require("eslint-friendly-formatter"), // 使用友好格式化
+      emitWarning: true, // 将 lint 错误显示为警告
+      failOnError: isProduction, // 生产环境构建失败
+    }),
     new HtmlWebpackPlugin({
       template: path.resolve(__dirname, "..", "public", "index.html"),
       filename: "index.html",
@@ -157,7 +167,7 @@ module.exports = {
     // 添加全局变量
     new webpack.ProvidePlugin({
       $: "jquery",
-      jQuery: 'jquery',
+      jQuery: "jquery",
       _: "lodash",
       _map: ["lodash", "map"],
     }),
@@ -166,15 +176,15 @@ module.exports = {
       IS_PRODUCTION: isProduction,
     }),
     // 添加静态资源
-    new HtmlWebpackTagsPlugin({ 
-      publicPath: '',
-      append: false, 
+    new HtmlWebpackTagsPlugin({
+      publicPath: "",
+      append: false,
       tags: [
         {
           path: "https://cdn.jsdelivr.net/npm/jquery@3.7.1/dist/jquery.min.js",
           hash: true,
-        }
-      ]
+        },
+      ],
     }),
     new webpack.IgnorePlugin({
       resourceRegExp: /^\.\/locale$/,

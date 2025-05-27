@@ -32,7 +32,7 @@
     "src/setupTests.ts",
     "config",
     "postcss.config.js",
-    "eslint.config.cjs",
+    "eslint.config.js",
     "mock"
   ]
 }

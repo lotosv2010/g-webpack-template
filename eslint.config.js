@@ -1,0 +1,45 @@
+const { defineConfig, globalIgnores } = require("eslint/config");
+const babelParser = require("@babel/eslint-parser");
+const js = require("@eslint/js");
+const globals = require("globals");
+
+module.exports = defineConfig([
+  globalIgnores([
+    "**/config/**",
+    "**/node_modules/**",
+    "**/dist/**",
+    "**/coverage/**",
+    "**/build/**",
+    "**/public/**",
+    "**/mock/**",
+    "**/test/**",
+    "**/reports/**",
+    "eslint.config.js",
+  ]),
+  {
+    files: ["**/*.{js,mjs,cjs}"],
+    languageOptions: {
+      ecmaVersion: "latest",
+      sourceType: "module",
+      parser: babelParser,
+      globals: {
+        ...globals.node,
+        ...globals.browser,
+        ...globals.es2025,
+        IS_PRODUCTION: "readonly",
+        _map: "readonly",
+      },
+    },
+  },
+  {
+    files: ["**/*.{js,mjs,cjs}"],
+    plugins: {
+      js,
+    },
+    extends: ["js/recommended"],
+    rules: {
+      semi: "error",
+      "prefer-const": "error",
+    },
+  },
+]);

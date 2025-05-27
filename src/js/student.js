@@ -8,6 +8,7 @@ class Student {
     this.name = name;
   }
 }
+console.log(new Student('test'));
 
 function *gen() {
   yield 1;
