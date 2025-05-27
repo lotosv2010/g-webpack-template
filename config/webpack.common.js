@@ -166,8 +166,6 @@ module.exports = {
     }),
     // 添加全局变量
     new webpack.ProvidePlugin({
-      $: "jquery",
-      jQuery: "jquery",
       isArray: ["lodash-es", "isArray"],
     }),
     // 添加全局变量

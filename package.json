@@ -75,7 +75,6 @@
   "dependencies": {
     "core-js": "^3.42.0",
     "express": "^5.1.0",
-    "jquery": "^3.7.1",
     "lodash-es": "^4.17.21",
     "moment": "^2.30.1"
   }
