@@ -1,5 +1,6 @@
 const { defineConfig, globalIgnores } = require("eslint/config");
 const babelParser = require("@babel/eslint-parser");
+const typescriptParser = require("@typescript-eslint/parser");
 const js = require("@eslint/js");
 const globals = require("globals");
 
@@ -21,7 +22,7 @@ module.exports = defineConfig([
     languageOptions: {
       ecmaVersion: "latest",
       sourceType: "module",
-      parser: babelParser,
+      parser: typescriptParser,
       globals: {
         ...globals.node,
         ...globals.browser,
@@ -29,7 +30,6 @@ module.exports = defineConfig([
         $: "readonly",
         jQuery: "readonly",
         IS_PRODUCTION: "readonly",
-        _: "readonly",
         isArray: "readonly",
       },
     },
