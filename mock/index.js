@@ -1,5 +1,6 @@
 const express = require('express');
 const app = express();
+const cors = require('cors');
 // const webpack = require('webpack');
 // const webpackDevMiddleware = require('webpack-dev-middleware');
 // const config = require('./webpack.config');
@@ -13,6 +14,8 @@ const app = express();
 //     publicPath: config.output.publicPath,
 //   })
 // );
+
+app.use(cors());
 
 app.get('/user', (req, res) => {
   res.json({ name: 'test' });

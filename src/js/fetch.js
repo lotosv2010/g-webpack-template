@@ -1,4 +1,4 @@
-const baseUrl = 'http://localhost:3030/api';
+const baseUrl = `http://localhost:${IS_PRODUCTION ? '6060' : '3030/api'}`;
 
 fetch(`${baseUrl}/user`)
   .then(res => res.json())

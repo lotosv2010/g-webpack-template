@@ -108,6 +108,11 @@ const mergedConfig = merge(common,{
     }),
     new FileManagerPlugin({
       events: {
+        onStart: {
+          delete: [
+            './sourcemap',
+          ],
+        },
         onEnd: {
           copy: [
             // TODO 正式上线时，destination 需要修改为正式上线的目录
