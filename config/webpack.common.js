@@ -89,21 +89,6 @@ module.exports = {
         exclude: /node_modules/,
         use: {
           loader: "swc-loader", // SWC 替代 Babel
-          options: {
-            jsc: {
-              parser: {
-                syntax: "typescript",
-                tsx: true,
-                decorators: true, // ✅ 启用装饰器
-              },
-              transform: {
-                legacyDecorator: true, // ✅ 必须设置为 true
-                react: {
-                  runtime: "automatic",
-                },
-              },
-            },
-          },
         },
       },
       {

@@ -11,11 +11,7 @@ const WebpackLogPlugin = require('./webpack-log-plugin');
 const { EsbuildPlugin } = require('esbuild-loader');
 
 const formatName = (module, chunks, cacheGroupKey) => {
-  const moduleFileName = module
-    .identifier()
-    .split('/')
-    .reduceRight((item) => item);
-  // const allChunksNames = chunks.map((item) => item.name).join('~');
+    const moduleFileName = path.basename(module.identifier());
   return `${cacheGroupKey}-${moduleFileName}`;
 }
 

@@ -3,5 +3,18 @@
     // "targets": "> 0.25%, not dead", // 被.browserslist 配置的浏览器版本代替
     "mode": "usage",
     "coreJs": "3.42"
+  },
+  "jsc": {
+    "parser": {
+      "syntax": "typescript",
+      "tsx": true,
+      "decorators": true // ✅ 启用装饰器
+    },
+    "transform": {
+      "legacyDecorator": true, // ✅ 必须设置为 true
+      "react": {
+        "runtime": "automatic"
+      }
+    }
   }
 }
